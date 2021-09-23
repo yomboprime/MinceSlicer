@@ -127,7 +127,7 @@ In this folder you have the options that control exposure times, speeds, etc:
 
 ### Relief / emboss
 
-This button opens up the relief / emboss 3D textures dialog. See the [section on relief / emboss.](#ReliefEmboss)
+This button opens up the relief / emboss 3D textures dialog. See the section on relief / emboss.
 
 ### Slice
 
@@ -151,7 +151,7 @@ This button removes all objects from the build plate.
 
 This button lets you save the project as a .mince file. It includes all models on the build plate, all loaded images and all settings including relief / emboss presets.
 
-When loading a project by dragging a .mince file to the screen, a dialog will show asking what things do you want to load from the file: Models, images, machine settings, print settings and/or relief / emboss presets. So you can save projects with different settings and use them as templates. 
+When loading a project by dragging a .mince file to the screen, a dialog will show asking what things do you want to load from the file: Models, images, machine settings, print settings and/or relief / emboss presets. So you can save projects with different settings and use them as templates.
 
 ### Save settings
 
@@ -187,7 +187,7 @@ This button removes the selected image from the images list.
 
 
 
-## Relief / emboss textures {#ReliefEmboss}
+## Relief / emboss textures
 
 Mince Slicer has the ability to apply a relief or emboss to the models while slicing (or both, we will refer to them simply as "relief" from now on). It may be called a "3D texture". The advantage of doing the relief in the slicing rather than editing the geometry is that the mesh file is smaller and more manageable. On the other hand, when using the relief the slice time can be very long (specially if used together with anti-aliasing)
 
@@ -195,7 +195,7 @@ To use the relief you normally need properly UV-mapped models (I say "normally" 
 
 The relief defines values from 1 (maximum height above model) to -1 (minimum height under the model), with 0 meaning no relief or emboss at that point. Any value in-between is allowed, meaning that the relief is a height field relative to the model surface. This value is then multiplied by the thickness of the relief, defined in the relief preset, to obtain the final relief or emboss height or depth.
 
-Reliefs are stored in presets (more on that later). Each relief preset has a root node with a tree of nodes hanging from it, which define the heightfield. Nodes represent arithmetic and other types of operations, so the relief heightfields are mathematical functions that give the height above the UV plane. See the following ["Relief nodes"](#ReliefNodes) section for a description of all nodes and its parameters. But don't worry, there are predefined presets and you can use the "Image" or "Tiled image" presets to simply apply an image as a relief / emboss texture. 
+Reliefs are stored in presets (more on that later). Each relief preset has a root node with a tree of nodes hanging from it, which define the heightfield. Nodes represent arithmetic and other types of operations, so the relief heightfields are mathematical functions that give the height above the UV plane. See the following "Relief nodes" section for a description of all nodes and its parameters. But don't worry, there are predefined presets and you can use the "Image" or "Tiled image" presets to simply apply an image as a relief / emboss texture.
 
 ### Relief / emboss dialog
 
@@ -209,7 +209,7 @@ Besides selecting, cloning and deleting a preset, you will see three more option
 - **Random seed** (float): This value is used in relief nodes that need pseudo-random numbers for the generation of the relief (usually noise nodes). Selecting a different value will change the noise and the texture.
 - **Relief texture tree**: This is the tree of nodes, or more precisely the root node. Each node has a selection list to select its type, and then some parameter values depending on the node type. When one of this parameters is of type node, you can select in turn a node type for it, and its parameters will show inside a new folder, forming the nodes tree. Other types of parameter values are numbers, text strings, booleans, node arrays and images.
 
-### Relief nodes {#ReliefNodes}
+### Relief nodes
 
 Following is the list of all node types with its parameters.
 
@@ -217,52 +217,52 @@ Some of the nodes have a parameter called "Mode". You can select this to be Reli
 
 ##### Arithmetic nodes
 
-- [Node Constant](#NodeConstant)
-- [Node Add](#NodeAdd)
-- [Node Negate](#NodeNegate)
-- [Node Multiply](#NodeMultiply)
-- [Node Divide](#NodeDivide)
-- [Node Power](#NodePower)
-- [Node Mix](#NodeMix)
-- [Node Min](#NodeMin)
-- [Node Max](#NodeMax)
-- [Node LessThan](#NodeLessThan)
-- [Node Sin](#NodeSin)
-- [Node Cos](#NodeCos)
+- Node Constant
+- Node Add
+- Node Negate
+- Node Multiply
+- Node Divide
+- Node Power
+- Node Mix
+- Node Min
+- Node Max
+- Node LessThan
+- Node Sin
+- Node Cos
 
 ##### Miscelaneous nodes
 
-- [Node NotBottom](#NodeNotBottom)
-- [Node Quantize](#NodeQuantize)
-- [Node ImageUV](#NodeImageUV)
-- [Node ImageTiledUV](#NodeImageTiledUV)
+- Node NotBottom
+- Node Quantize
+- Node ImageUV
+- Node ImageTiledUV
 
 ##### Evaluation nodes
 
-- [Node GetU](#NodeGetU)
-- [Node GetV](#NodeGetV)
-- [Node GetX](#NodeGetX)
-- [Node GetY](#NodeGetY)
-- [Node GetZ](#NodeGetZ)
-- [Node Evaluate](#NodeEvaluate)
-- [Node Preset](#NodePreset)
-- [Node MaterialSelector](#NodeMaterialSelector)
-- [Node Multiplex](#NodeMultiplex)
+- Node GetU
+- Node GetV
+- Node GetX
+- Node GetY
+- Node GetZ
+- Node Evaluate
+- Node Preset
+- Node MaterialSelector
+- Node Multiplex
 
 ##### Noise nodes
 
-- [Node SimplexUV](#NodeSimplexUV)
-- [Node PerlinUV](#NodePerlinUV)
-- [Node VoronoiUV](#NodeVoronoiUV)
+- Node SimplexUV
+- Node PerlinUV
+- Node VoronoiUV
 
 ##### Geometric nodes
 
-- [Node Checkered](#NodeCheckered)
-- [Node Tiles](#NodeTiles)
-- [Node Circles](#NodeCircles)
-- [Node Spots](#NodeSpots)
+- Node Checkered
+- Node Tiles
+- Node Circles
+- Node Spots
 
-#### Node Constant {#NodeConstant}
+#### Node Constant
 
 This node returns a constant value, which is its numeric parameter. It is used very often.
 
@@ -270,7 +270,7 @@ Parameters:
 
 - Value (number): The constant value.
 
-#### Node Add {#NodeAdd}
+#### Node Add
 
 Performs arithmetic addition of the parameter nodes A and B: A + B.
 
@@ -279,7 +279,7 @@ Parameters:
 - A (node): First operand.
 - B (node): Second operand.
 
-#### Node Negate {#NodeNegate}
+#### Node Negate
 
 Performs arithmetic negation of the parameter node A: - A
 
@@ -287,7 +287,7 @@ Parameters:
 
 - A (node): Node to negate.
 
-#### Node Multiply {#NodeMultiply}
+#### Node Multiply
 
 Performs arithmetic product of the parameter nodes A and B: A * B
 
@@ -296,9 +296,9 @@ Parameters:
 - A (node): First operand.
 - B (node): Second operand
 
-- 
+-
 
-#### Node Divide {#NodeDivide}
+#### Node Divide
 
 Performs arithmetic division of the parameter nodes A and B: A / B
 
@@ -307,7 +307,7 @@ Parameters:
 - A (node): First operand.
 - B (node): Second operand.
 
-#### Node Power {#NodePower}
+#### Node Power
 
 Performs arithmetic power of the parameter nodes A and B: A^B
 
@@ -316,7 +316,7 @@ Parameters:
 - A (node): First operand.
 - B (node): Second operand.
 
-#### Node Mix {#NodeMix}
+#### Node Mix
 
 Performs mixing of two node values by another node value that acts as a factor.
 
@@ -328,7 +328,7 @@ Parameters:
 - B (node): Second value.
 - Factor (node): Factor value for mixing.
 
-#### Node Min {#NodeMin}
+#### Node Min
 
 Performs arithmetic minimum of the parameter nodes A and B: minimum( A, B )
 
@@ -337,7 +337,7 @@ Parameters:
 - A (node): First operand.
 - B (node): Second operand.
 
-#### Node Max {#NodeMax}
+#### Node Max
 
 Performs arithmetic maximum of the parameter nodes A and B: maximum( A, B )
 
@@ -346,7 +346,7 @@ Parameters:
 - A (node): First operand.
 - B (node): Second operand.
 
-#### Node LessThan {#NodeLessThan}
+#### Node LessThan
 
 Performs arithmetic comparison "less than", A <= B of the parameter nodes A and B. Returns 1 if the inequality is satisfied, 0 otherwise.
 
@@ -355,31 +355,31 @@ Parameters:
 - A (node): First operand.
 - B (node): Second operand.
 
-#### Node Sin {#NodeSin}
+#### Node Sin
 
-Returns the trigonometric sinus function of the parameter Node A. 
+Returns the trigonometric sinus function of the parameter Node A.
 
 Parameters:
 
 - Mode: Defines the output values range. Can be Relief [0..1], Emboss [-1..0] or Relief_Emboss [-1..1].
 - A (node): The argument to the sin function.
 
-#### Node Cos {#NodeCos}
+#### Node Cos
 
-Returns the trigonometric cosinus function of the parameter Node A. 
+Returns the trigonometric cosinus function of the parameter Node A.
 
 Parameters:
 
 - Mode: Defines the output values range. Can be Relief [0..1], Emboss [-1..0] or Relief_Emboss [-1..1].
 - A (node): The argument to the cos function.
 
-#### Node NotBottom {#NodeNotBottom}
+#### Node NotBottom
 
 Returns 1 if the face on the model is pointing upwards, 0 otherwise. Upwards meaning that the vertical component of the normal vector is >= 0.
 
 Parameters: None.
 
-#### Node Quantize {#NodeQuantize}
+#### Node Quantize
 
 Flattens the output values to equal steps, like the lines in a topological map.
 
@@ -389,7 +389,7 @@ Parameters:
 - A (node): The value to flatten to steps.
 - Step size (node): The size of the step relative to the output range. For example, a value of 0.1 would generate 10 steps in Relief Mode.
 
-#### Node ImageUV {#NodeImageUV}
+#### Node ImageUV
 
 Maps a loaded image as the heightfield, with offset and size. If you want to tile an image multiple times onto the surface, use ImageTiledUV node instead.
 
@@ -402,7 +402,7 @@ Parameters:
 - Offset V (number): Image offset in the V direction, in UV space units [0..1]
 - Image (image): Select the image to be used (must be loaded previously)
 
-#### Node ImageTiledUV {#NodeImageTiledUV}
+#### Node ImageTiledUV
 
 Maps a loaded image as the heightfield, tiled multiples times in U and V, with offset and size inside the tile.
 
@@ -417,37 +417,37 @@ Parameters:
 - Offset V (number): Image offset in the V direction, inside the tile (in tile space units [0..1])
 - Image (image): Select the image to be used (must be loaded previously)
 
-#### Node GetU {#NodeGetU}
+#### Node GetU
 
 Outputs as value the U coordinate, from 0 to 1.
 
 Parameters: None.
 
-#### Node GetV {#NodeGetV}
+#### Node GetV
 
 Outputs as value the V coordinate, from 0 to 1.
 
 Parameters: None.
 
-#### Node GetX {#NodeGetX}
+#### Node GetX
 
 Outputs as value the X spatial coordinate (not clamped)
 
 Parameters: None.
 
-#### Node GetY {#NodeGetY}
+#### Node GetY
 
 Outputs as value the Y spatial coordinate (not clamped)
 
 Parameters: None.
 
-#### Node GetZ {#NodeGetZ}
+#### Node GetZ
 
 Outputs as value the Z spatial coordinate (not clamped)
 
 Parameters: None.
 
-#### Node Evaluate {#NodeEvaluate}
+#### Node Evaluate
 
 Evaluate a node by passing to it as UV values the ones given by another two nodes.
 
@@ -457,7 +457,7 @@ Parameters:
 - U (node): The node that gives the U value.
 - V (node): The node that gives the V value.
 
-#### Node Preset {#NodePreset}
+#### Node Preset
 
 Evaluates an existing Relief preset, just as it was another node.
 
@@ -465,7 +465,7 @@ Parameters:
 
 - Preset name (preset): A Relief preset selected from the available presets.
 
-#### Node MaterialSelector {#NodeMaterialSelector}
+#### Node MaterialSelector
 
 Selects between a set of nodes depending on the material index of the point in the model.
 
@@ -473,7 +473,7 @@ Parameters:
 
 - Materials (node array): Set of nodes to apply.
 
-#### Node Multiplex {#NodeMultiplex}
+#### Node Multiplex
 
 Selects between a set of nodes depending on the value of the Index parameter node.
 
@@ -482,7 +482,7 @@ Parameters:
 - Nodes (node array): Set of materials to apply.
 - Index (node ): The value of this node (not clamped and treated as an integer) is taken as index to the set of nodes.
 
-#### Node SimplexUV {#NodeSimplexUV}
+#### Node SimplexUV
 
 Returns the value of Simplex noise (generates a cloud-like image)
 
@@ -492,7 +492,7 @@ Parameters:
 - Scale U (node): Size of the clouds in U direction.
 - Scale V (node): Size of the clouds in V direction.
 
-#### Node PerlinUV {#NodePerlinUV}
+#### Node PerlinUV
 
 Returns the value of Perlin noise (generates cloud-like images with more detail)
 
@@ -504,7 +504,7 @@ Parameters:
 - Size multiplier (node): Size of smaller clouds through each iteration.
 - Contribution multiplier (node): Contribution of each iteration. Higher values makes rougher image.
 
-#### Node VoronoiUV {#NodeVoronoiUV}
+#### Node VoronoiUV
 
 Returns a voronoi image (like broken glass)
 
@@ -514,7 +514,7 @@ Parameters:
 - Number of points (number): Number of fracture points. Increasing this value leads to higher computing time.
 - Line thickness (node): Line thickness in UV units [0..1]
 
-#### Node Checkered {#NodeCheckered}
+#### Node Checkered
 
 Creates a checkered image.
 
@@ -526,7 +526,7 @@ Parameters:
 - Checker fraction U (node): This parameter controls the fraction in U between "black tiles" and "white tiles". A 0 means they are equal. Setting towards -1 or 1 changes their relative fraction.
 - Checker fraction V (node): This parameter controls the fraction in V between "black tiles" and "white tiles". A 0 means they are equal. Setting towards -1 or 1 changes their relative fraction.
 
-#### Node Tiles {#NodeTiles}
+#### Node Tiles
 
 Creates a tiled surface, with beveled margins between the tiles.
 
@@ -538,7 +538,7 @@ Parameters:
 - Bevel fraction (node): Size of the bevel separation relative to tile size.
 - Alternated bricks (boolean): If true, tiles are alternated by half a tile in U in one every two rows, like in a typical bricked wall.
 
-#### Node Circles {#NodeCircles}
+#### Node Circles
 
 Makes a pattern of concentric circles.
 
@@ -549,7 +549,7 @@ Parameters:
 - Offset U (node): This node is evaluated and added to the U coordinate.
 - Offset V (node): This node is evaluated and added to the V coordinate.
 
-#### Node Spots {#NodeSpots}
+#### Node Spots
 
 Makes circles (better described as cones) in a tiled manner.
 
