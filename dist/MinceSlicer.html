@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>MinceSlicer</title>
+		<meta name="Cross-Origin-Opener-Policy" content="same-origin">
+		<meta name="Cross-Origin-Embedder-Policy" content="require-corp">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				margin: 0px;
+				overflow: hidden;
+				background-color: #012;
+				color: #fff;
+				font-family: Monospace;
+				font-size: 13px;
+				line-height: 24px;
+				overscroll-behavior: none;
+			}
+			a {
+				color: #08f;
+			}
+		</style>
+
+	</head>
+
+	<body>
+
+		<div id="info" style="position:absolute;width:100%;background-color:#000;">
+		<a href="https://github.com/yomboprime/MinceSlicer" target="_blank" rel="noopener">MinceSlicer</a>
+		<span id="infoText">Tip: You can drag into the screen a .dae, .obj, .stl, .mince or image file.</span>
+		</div>
+
+		<script type="module" src="./main.js"></script>
+
+		<input type="file" id="theInputFiles" style="display:none">
+
+	</body>
+</html>
