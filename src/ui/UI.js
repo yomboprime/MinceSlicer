@@ -144,7 +144,7 @@ class MinceSlicerUI {
 
 		const scope = this;
 
-		this.theInputFiles.addEventListener( 'change', ( event ) => { scope.inputFileSelected( event.target.files[ 0 ] ); }, false );
+		this.theInputFiles.addEventListener( 'change', ( event ) => { scope.inputFilesSelected( event.target.files ); }, false );
 		this.minceSlicer.container.addEventListener( 'dragover', ( event ) => { scope.handleDragOver( event ); }, false );
 		this.minceSlicer.container.addEventListener( 'drop', ( event ) => { scope.handleDropIn( event ); }, false );
 
@@ -2978,7 +2978,7 @@ class MinceSlicerUI {
 				for ( let i = 0, il = previewCanvas.width; i < il; i ++ ) {
 
 					const x = 2 * i / il - 1;
-					const y = 2 * ( jl - j ) / jl - 1;
+					const y = 2 * j / jl - 1;
 
 					scope.vec31.set( x, y, 0 );
 					scope.vec31.applyMatrix4( previewMatrixInverse );
