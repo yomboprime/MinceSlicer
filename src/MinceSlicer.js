@@ -320,7 +320,7 @@ class MinceSlicer {
 
 					//float offset = 1.0 / float( textureSize( layerMap, 0 ).y );
 
-					vUV = vec2( 1.0 - uv.y /*- offset*/, uv.x );
+					vUV = vec2( uv.y, uv.x );
 					gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
 
 				}

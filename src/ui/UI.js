@@ -2978,7 +2978,7 @@ class MinceSlicerUI {
 				for ( let i = 0, il = previewCanvas.width; i < il; i ++ ) {
 
 					const x = 2 * i / il - 1;
-					const y = 2 * j / jl - 1;
+					const y = 2 * ( jl - j ) / jl - 1;
 
 					scope.vec31.set( x, y, 0 );
 					scope.vec31.applyMatrix4( previewMatrixInverse );

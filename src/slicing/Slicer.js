@@ -197,7 +197,7 @@ class Slicer {
 			Z in machine is Y in Three.js
 		*/
 		const layerHeight = this.settings.layerHeight;
-		const initialRayZ = - this.settings.machineX * 0.5 - this.settings.maxDistance;
+		const initialRayZ = this.settings.machineX * 0.5 + this.settings.maxDistance;
 		const resolutionX = this.settings.resolutionY;
 		const resolutionZ = this.settings.resolutionX;
 		const voxelXSize = this.settings.machineY / resolutionX;
@@ -207,10 +207,10 @@ class Slicer {
 
 		const mesh = this.mesh;
 		const raycaster = this.raycaster;
-		const ray = this.raycaster.ray;
+		const ray = raycaster.ray;
 		const bvh = this.bvh;
 
-		ray.direction.set( 0, 0, 1 );
+		ray.direction.set( 0, 0, - 1 );
 
 		// Clear image
 		image.fill( 0 );
@@ -219,7 +219,7 @@ class Slicer {
 		for ( let layerRayIndex = 0; layerRayIndex < resolutionX; layerRayIndex ++ ) {
 
 			let x = initialLayerRayX - layerRayIndex * voxelXSize;
-			this.raycaster.ray.origin.set( x, layerHeight * ( layerIndex + 0.5 ), initialRayZ );
+			ray.origin.set( x, layerHeight * ( layerIndex + 0.5 ), initialRayZ );
 
 			const intersections = [ ];
 			bvh.raycast( mesh, raycaster, ray, intersections );
@@ -245,7 +245,7 @@ class Slicer {
 					intersection0 = intersections[ intersectionIndex0 ];
 
 					//const isFrontFacing = intersection0.face.normal.x < 0;
-					const isFrontFacing = intersection0.face.normal.dot( raycaster.ray.direction ) < 0;
+					const isFrontFacing = intersection0.face.normal.dot( ray.direction ) < 0;
 
 					// Found it
 					if ( isFrontFacing ) break;
@@ -265,7 +265,7 @@ class Slicer {
 					intersection1 = intersections[ intersectionIndex1 ];
 
 					//const isFrontFacing = intersection1.face.normal.x < 0;
-					const isFrontFacing = intersection1.face.normal.dot( raycaster.ray.direction ) < 0;
+					const isFrontFacing = intersection1.face.normal.dot( ray.direction ) < 0;
 
 					if ( ! isFrontFacing ) {
 
@@ -285,8 +285,8 @@ class Slicer {
 
 				if ( intersectionIndex1 >= numIntersections ) break;
 
-				var minXIndex = Math.max( 0, Math.min( resolutionZ - 1, Math.floor( ( intersection0.point.z + pixelOffset ) / voxelZSize ) ) );
-				var maxXIndex = Math.max( 0, Math.min( resolutionZ - 1, Math.round( ( intersection1.point.z + pixelOffset ) / voxelZSize ) ) );
+				var minXIndex = Math.max( 0, Math.min( resolutionZ - 1, Math.round( ( - intersection0.point.z + pixelOffset ) / voxelZSize ) ) );
+				var maxXIndex = Math.max( 0, Math.min( resolutionZ - 1, Math.floor( ( - intersection1.point.z + pixelOffset ) / voxelZSize ) ) );
 
 				image.fill( 255, firstPixelIndex + minXIndex, firstPixelIndex + maxXIndex );
 
@@ -321,8 +321,6 @@ class Slicer {
 		const resolutionZ = this.settings.resolutionX;
 		const voxelXSize = this.settings.machineY / resolutionX;
 		const voxelZSize = this.settings.machineX / resolutionZ;
-		const initialRayZ = - this.settings.machineX * 0.5 + voxelZSize * 0.5;
-		const initialRayX = this.settings.machineY * 0.5 - voxelXSize * 0.5;
 		const y = layerHeight * layerIndex;
 		const pixelOffsetX = this.settings.machineY * 0.5;
 		const pixelOffsetZ = this.settings.machineX * 0.5;
@@ -346,7 +344,6 @@ class Slicer {
 		const reliefMaxSize = this.reliefPreset ? this.reliefPreset.maxHeight : 0;
 
 		const subvoxelContribution = 256 / Math.pow( antialiasing, 3 );
-		//const subvoxelContribution = 256 / Math.pow( antialiasing, 2 );
 
 		const antialiasingVoxelSizeFactor = antialiasing === 1 ? 1 : 1 + antialiasing * 0.2;
 		const antialiasingVoxelSizeX = antialiasingVoxelSizeFactor * voxelXSize;
@@ -379,7 +376,7 @@ class Slicer {
 			let numSolids = 0;
 			for ( let i = 0, il = intersections.length; i < il; i ++ ) {
 
-				const isFrontFacing = intersections[ i ].face.normal.dot( raycaster.ray.direction ) < 0;
+				const isFrontFacing = intersections[ i ].face.normal.dot( ray.direction ) < 0;
 
 				numSolids += isFrontFacing ? 1 : - 1;
 			}
@@ -460,7 +457,8 @@ class Slicer {
 
 						if ( currentVoxelContribution > 0 ) {
 
-							image[ ( i0 + m ) * resolutionZ + n + j0 ] = Math.min( 255, currentVoxelContribution );
+							//image[ ( i0 + m ) * resolutionZ + ( n + j0 ) ] = Math.min( 255, currentVoxelContribution );
+							image[ ( i0 + m ) * resolutionZ + ( resolutionZ - ( n + j0 ) - 1 ) ] = Math.min( 255, currentVoxelContribution );
 
 						}
 
@@ -499,7 +497,8 @@ class Slicer {
 
 							for ( let n = 0; n < dj; n ++ ) {
 
-								image[ ( i0 + m ) * resolutionZ + n + j0 ] = 255;
+								//image[ ( i0 + m ) * resolutionZ + ( n + j0 ) ] = 255;
+								image[ ( i0 + m ) * resolutionZ + ( resolutionZ - ( n + j0 ) - 1 ) ] = 255;
 
 							}
 

@@ -65,7 +65,7 @@ class ReliefNodeImageTiledUV extends ReliefNodeCell {
 
 		if ( u < 0 || u > 1 || v < 0 || v > 1 ) return 0;
 
-		const p = Math.floor( ( 1 - v ) * this.height ) * this.width + Math.floor( u * this.width );
+		const p = Math.floor( v * this.height ) * this.width + Math.floor( u * this.width );
 
 		return this.imageData[ p ] * this.grayScaleConstant + this.floor;
 
