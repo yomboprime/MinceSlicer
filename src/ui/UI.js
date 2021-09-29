@@ -2410,6 +2410,7 @@ class MinceSlicerUI {
 
 			previewCanvasCtx.save();
 			previewCanvasCtx.translate( previewCanvas.width * 0.5, previewCanvas.height * 0.5 );
+			previewCanvasCtx.scale( 1, -1 );
 			previewCanvasCtx.rotate( Math.PI * 0.5 );
 			previewCanvasCtx.translate( - previewCanvas.width * 0.5, - previewCanvas.height * 0.5 );
 
@@ -2484,7 +2485,7 @@ class MinceSlicerUI {
 			event.preventDefault();
 
 			const mouseDX = event.clientX - mouseX0;
-			const mouseDY = event.clientY - mouseY0;
+			const mouseDY = - ( event.clientY - mouseY0 );
 
 			mouseX0 = event.clientX;
 			mouseY0 = event.clientY;
