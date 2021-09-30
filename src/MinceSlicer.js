@@ -790,8 +790,6 @@ class MinceSlicer {
 				const newSlicerObject = this.createNewSlicerObject( this.project, newMesh, slicerObject.originalFileName );
 
 				newSlicerObject.config.heightAboveBuildplate = slicerObject.config.heightAboveBuildplate;
-				newSlicerObject.config.scale.copy( slicerObject.config.scale );
-				newSlicerObject.config.rotationQuaternion.copy( slicerObject.config.rotationQuaternion );
 
 				placeObject( newSlicerObject, i, j );
 
@@ -799,12 +797,15 @@ class MinceSlicer {
 
 		}
 
-		function placeObject( slicerObject, i, j ) {
+		function placeObject( obj, i, j ) {
 
-			slicerObject.dummyTransformObject.position.x = offsetX + i * ( sizeX + separationX );
-			slicerObject.dummyTransformObject.position.z = offsetZ + j * ( sizeZ + separationZ );
+			obj.dummyTransformObject.position.x = offsetX + i * ( sizeX + separationX );
+			obj.dummyTransformObject.position.z = offsetZ + j * ( sizeZ + separationZ );
 
-			scope.objectTransformChanged( slicerObject );
+			obj.dummyTransformObject.quaternion.copy( slicerObject.dummyTransformObject.quaternion );
+			obj.dummyTransformObject.scale.copy( slicerObject.dummyTransformObject.scale );
+
+			scope.objectTransformChanged( obj );
 
 		}
 
