@@ -72,7 +72,7 @@ The first four buttons in the menu select different tools. When a model is selec
 
 ### Tools buttons
 
-- **Move tool** (Key **g**): You can move the model around the build plate (but not change its height position). Holding `Ctrl` key activates snap to integer millimenters.
+- **Move tool** (Key **g**): You can move the model around the build plate (but not change its height position). Holding `Ctrl` key activates snap to integer millimeters.
 - **Rotate tool** (Key **r**): You can rotate the model around different axes. Holding `Ctrl` key activates snap to multiples of 15 degrees.
 - **Scale tool** (Key **s**): You can scale the model on different axes or uniformly. Holding `Ctrl` key activates snap to multiples of 50%.
 - **Sit model on face** (Key **f**): Just click on a point in the model and it will be oriented so that it sits on that triangle.
