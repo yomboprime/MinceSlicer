@@ -53,7 +53,10 @@ The serve script will tell you on the console the URL to open Mince Slicer local
 
 When the application is open you will see a 3D view of the build plate, and a main menu on the right.
 
-To use Mince Slicer you will have to adjust machine and print settings correctly and according to your printer. Failing in doing so could result in failed prints or printer damage, or worse losses. Please refer to the settings section.
+- Note 1: To use Mince Slicer you will have to adjust machine and print settings correctly and according to your printer. Failing in doing so could result in failed prints or printer damage, or worse losses. Please refer to the settings section.
+- Note 2: About overlapping solids, Mince Slicer can handle them correctly when anti-aliasing is off (value 1) and relief / emboss is off. If overlapping solids are present and these conditions are not met, the slicing will give incorrect results and the print will probably fail.
+
+
 
 ## Loading models
 
