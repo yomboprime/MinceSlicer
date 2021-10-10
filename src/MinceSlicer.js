@@ -1234,6 +1234,7 @@ class MinceSlicer {
 					if ( ! scope.resinPrint.pngLayers[ i ] ) {
 
 						resinPrintNumLayers = i;
+						scope.resinPrint.pngLayers.slice( resinPrintNumLayers, scope.resinPrint.pngLayers.length - resinPrintNumLayers );
 						break;
 
 					}
@@ -1278,6 +1279,8 @@ class MinceSlicer {
 
 		function finishUp() {
 
+			scope.jobManagerIsBusy = false;
+
 			if ( scope.cancelSliceFlag ) {
 
 				scope.resinPrint = null;
@@ -1300,8 +1303,6 @@ class MinceSlicer {
 				scope.gui.createSliceResultDialog( scope.resinPrint, onSave, onCancel );
 
 			}
-
-			scope.jobManagerIsBusy = false;
 
 		}
 

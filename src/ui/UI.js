@@ -2059,12 +2059,13 @@ class MinceSlicerUI {
 		function close() {
 
 			if ( ! closed ) {
+kk
+				scope.restoreSettingsDialogShown = false;
 
 				deletePanelUI( panelUI );
 				document.body.removeChild( panelUI.div );
 				closed = true;
 
-				scope.restoreSettingsDialogShown = false;
 			}
 
 		}
@@ -2212,6 +2213,7 @@ class MinceSlicerUI {
 				deletePanelUI( panelUI );
 				document.body.removeChild( panelUI.div );
 				closed = true;
+
 			}
 
 		}
