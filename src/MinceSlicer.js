@@ -846,7 +846,7 @@ class MinceSlicer {
 
 		if ( geometries.length === 0 ) {
 
-			this.userMessage( "The model does not contain geometry. File: '" + file.name + "'.", "error" );
+			this.userMessage( "The model does not contain geometry.", "error" );
 			return;
 
 		}
@@ -854,7 +854,7 @@ class MinceSlicer {
 		const mergedGeometry = Slicer.mergeBufferGeometries( geometries );
 		if ( ! mergedGeometry ) {
 
-			this.userMessage( "Error merging into one geometry the model file '" + file.name + "'.", "error" );
+			this.userMessage( "Error merging into one geometry the model file.", "error" );
 			return;
 
 		}
@@ -1217,7 +1217,7 @@ class MinceSlicer {
 			// All jobs completed function
 			function() {
 
-				const resinPrintNumLayers = pngLayers.length;
+				let resinPrintNumLayers = pngLayers.length;
 
 				sliceDialog.onProgress( resinPrintNumLayers, resinPrintNumLayers );
 
@@ -1227,6 +1227,19 @@ class MinceSlicer {
 					return;
 
 				}
+
+				// Check all layers are set
+				for ( let i = 0; i < resinPrintNumLayers; i ++ ) {
+
+					if ( ! scope.resinPrint.pngLayers[ i ] ) {
+
+						resinPrintNumLayers = i;
+						break;
+
+					}
+
+				}
+
 
 				// Final print processing
 
@@ -1251,17 +1264,6 @@ class MinceSlicer {
 
 				// Coin units
 				printSettings.price = printSettings.weight * printSettings.resinPriceKg;
-
-				// Check all layers are set
-				for ( let i = 0; i < resinPrintNumLayers; i ++ ) {
-
-					if ( ! scope.resinPrint.pngLayers[ i ] ) {
-
-						makeInfoDialog( 600, "Internal error: ", "Layer " + i + " is invalid.", "OK" );
-						scope.cancelSliceFlag = true;
-					}
-
-				}
 
 				finishUp();
 
